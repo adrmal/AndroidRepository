@@ -1,46 +1,39 @@
-<?xml version="1.0" encoding="utf-8"?><!--
-<TableLayout
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/row"
     tools:context=".MainActivity"
 >
-    <TableRow
-        android:id="@+id/tableRow1"
+    <ImageView
+        android:id="@+id/elementImage"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-    >
-        <ImageView
-            android:id="@+id/elementImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-        />
-        <TextView
-            android:id="@+id/elementName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-        />
-    </TableRow>
-    <TableRow
-        android:id="@+id/tableRow2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-    >
-        <TextView
-            android:id="@+id/elementSize"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-        />
-    </TableRow>
-</TableLayout>
--->
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/row"
-    tools:context=".MainActivity"
-/>
+        android:layout_height="60dp"
+        android:layout_rowSpan="2"
+        android:layout_column="1"
+        android:layout_row="1"
+        android:paddingLeft="15dp"
+    />
+    <TextView
+        android:id="@+id/elementName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_column="2"
+        android:layout_row="1"
+        android:paddingLeft="15dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#161616"
+    />
+    <TextView
+        android:id="@+id/elementSize"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_column="2"
+        android:layout_row="2"
+        android:paddingLeft="15dp"
+        android:textColor="#161616"
+    />
+</GridLayout>
