@@ -1,38 +1,32 @@
 package applicationlist.adrian.pl.applicationslist;
 
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.support.v7.app.AppCompatActivity;
+import android.app.LocalActivityManager;
+import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.widget.ListView;
-import java.util.ArrayList;
-import java.util.List;
+import android.widget.TabHost;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
 
-    private PackageManager packageManager;
-    private List<ApplicationInfo> applicationInfosList;
-    private ListView listView;
-    private List<Element> elementsList;
-    private ExtendedArrayAdapter adapter;
+    private TabHost tabHost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        packageManager = getPackageManager();
-        applicationInfosList = packageManager.getInstalledApplications(0);
+        tabHost = (TabHost)findViewById(R.id.tabHost);
+        LocalActivityManager lam = new LocalActivityManager(this, false);
+        lam.dispatchCreate(savedInstanceState);
+        tabHost.setup(lam);
 
-        elementsList = new ArrayList<>();
-        for(ApplicationInfo application : applicationInfosList) {
-            elementsList.add(new Element((String)packageManager.getApplicationLabel(application),3.5,packageManager.getApplicationIcon(application)));
-        }
+        TabHost.TabSpec t1 = tabHost.newTabSpec("all").setIndicator("Wszystkie").setContent(new Intent(this, AllAppsActivity.class));
+        TabHost.TabSpec t2 = tabHost.newTabSpec("downloaded").setIndicator("Zainstalowane").setContent(new Intent(this, DownloadedAppsActivity.class));
+        TabHost.TabSpec t3 = tabHost.newTabSpec("running").setIndicator("Uruchomione").setContent(new Intent(this, RunningAppsActivity.class));
 
-        listView = (ListView) findViewById(R.id.applicationListView);
-
-        adapter = new ExtendedArrayAdapter(this, R.layout.application_list_element, elementsList);
-
-        listView.setAdapter(adapter);
+        tabHost.addTab(t1);
+        tabHost.addTab(t2);
+        tabHost.addTab(t3);
+        tabHost.setCurrentTab(0);
     }
 }
