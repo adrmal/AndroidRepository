@@ -28,13 +28,13 @@ public class DownloadedAppsActivity extends Activity {
         elementsList = new ArrayList<>();
         for(ApplicationInfo application : applicationInfosList) {
             if((application.flags & ApplicationInfo.FLAG_SYSTEM) == 0 && (application.flags & ApplicationInfo.FLAG_UPDATED_SYSTEM_APP) == 0) {
-                elementsList.add(new Element((String) packageManager.getApplicationLabel(application), 3.5, packageManager.getApplicationIcon(application)));
+                elementsList.add(new Element((String) packageManager.getApplicationLabel(application), packageManager.getApplicationIcon(application), 3.5));
             }
         }
 
         listView = (ListView) findViewById(R.id.applicationDownloaded);
 
-        adapter = new ExtendedArrayAdapter(this, R.layout.application_list_element, elementsList);
+        adapter = new ExtendedArrayAdapter(this, R.layout.element, elementsList);
 
         listView.setAdapter(adapter);
     }

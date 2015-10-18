@@ -1,6 +1,8 @@
 package applicationlist.adrian.pl.applicationslist;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -12,7 +14,7 @@ import java.util.List;
 public class RunningAppsActivity extends Activity {
 
     private PackageManager packageManager;
-    private List<ApplicationInfo> applicationInfosList;
+    private List<ActivityManager.RunningAppProcessInfo> applicationInfosList;
     private ListView listView;
     private List<Element> elementsList;
     private ExtendedArrayAdapter adapter;
@@ -23,16 +25,18 @@ public class RunningAppsActivity extends Activity {
         setContentView(R.layout.activity_running);
 
         packageManager = getPackageManager();
-        applicationInfosList = packageManager.getInstalledApplications(0);
+
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        applicationInfosList = activityManager.getRunningAppProcesses();
 
         elementsList = new ArrayList<>();
-        for(ApplicationInfo application : applicationInfosList) {
-            elementsList.add(new Element((String)packageManager.getApplicationLabel(application), 3.5, packageManager.getApplicationIcon(application)));
+        for(int i=0; i<applicationInfosList.size(); i++) {
+            elementsList.add(new Element(applicationInfosList.get(i).processName, packageManager.getApplicationIcon(new ApplicationInfo())));
         }
 
         listView = (ListView) findViewById(R.id.applicationRunning);
 
-        adapter = new ExtendedArrayAdapter(this, R.layout.application_list_element, elementsList);
+        adapter = new ExtendedArrayAdapter(this, R.layout.running_element, elementsList);
 
         listView.setAdapter(adapter);
     }

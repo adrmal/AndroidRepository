@@ -20,9 +20,9 @@ public class MainActivity extends FragmentActivity {
         lam.dispatchCreate(savedInstanceState);
         tabHost.setup(lam);
 
-        TabHost.TabSpec t1 = tabHost.newTabSpec("all").setIndicator("Wszystkie").setContent(new Intent(this, AllAppsActivity.class));
-        TabHost.TabSpec t2 = tabHost.newTabSpec("downloaded").setIndicator("Zainstalowane").setContent(new Intent(this, DownloadedAppsActivity.class));
-        TabHost.TabSpec t3 = tabHost.newTabSpec("running").setIndicator("Uruchomione").setContent(new Intent(this, RunningAppsActivity.class));
+        TabHost.TabSpec t1 = tabHost.newTabSpec("all").setIndicator("Wszystkie aplikacje").setContent(new Intent(this, AllAppsActivity.class));
+        TabHost.TabSpec t2 = tabHost.newTabSpec("downloaded").setIndicator("Zainstalowane aplikacje").setContent(new Intent(this, DownloadedAppsActivity.class));
+        TabHost.TabSpec t3 = tabHost.newTabSpec("running").setIndicator("Uruchomione procesy").setContent(new Intent(this, RunningAppsActivity.class));
 
         tabHost.addTab(t1);
         tabHost.addTab(t2);

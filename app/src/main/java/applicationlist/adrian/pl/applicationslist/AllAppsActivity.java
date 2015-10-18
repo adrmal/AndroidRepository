@@ -27,12 +27,12 @@ public class AllAppsActivity extends Activity {
 
         elementsList = new ArrayList<>();
         for(ApplicationInfo application : applicationInfosList) {
-            elementsList.add(new Element((String)packageManager.getApplicationLabel(application), 3.5, packageManager.getApplicationIcon(application)));
+            elementsList.add(new Element((String)packageManager.getApplicationLabel(application), packageManager.getApplicationIcon(application), 3.5));
         }
 
         listView = (ListView) findViewById(R.id.applicationAll);
 
-        adapter = new ExtendedArrayAdapter(this, R.layout.application_list_element, elementsList);
+        adapter = new ExtendedArrayAdapter(this, R.layout.element, elementsList);
 
         listView.setAdapter(adapter);
     }
