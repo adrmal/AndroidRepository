@@ -3,9 +3,11 @@ package applicationlist.adrian.pl.applicationslist;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -39,6 +41,18 @@ public class RunningAppsActivity extends Activity {
         adapter = new ExtendedArrayAdapter(this, R.layout.running_element, elementsList);
 
         listView.setAdapter(adapter);
+    }
+    // TODO
+    public void showAppInfo(View view) {
+        Intent intent = new Intent(this, AppInfoActivity.class);
+        //for(ApplicationInfo application : applicationInfosList) {
+            //if(packageManager.getApplicationLabel(application)=="") {
+                //
+            //}
+        //}
+        //intent.putExtra(MainActivity.appInfoConstant, packageManager.getApplicationLabel(applicationInfosList.get(R.id.elementName)));
+        intent.putExtra(MainActivity.appInfoConstant, "blabla3");
+        startActivity(intent);
     }
 
 }

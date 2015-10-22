@@ -9,6 +9,7 @@ import android.widget.TabHost;
 public class MainActivity extends FragmentActivity {
 
     private TabHost tabHost;
+    final static String appInfoConstant = "pl.adrian.applicationslist.APPINFO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
