@@ -2,10 +2,11 @@ package applicationlist.adrian.pl.applicationslist;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ import java.util.List;
 public class AllAppsActivity extends Activity {
 
     private PackageManager packageManager;
-    private List<ApplicationInfo> applicationInfosList;
+    private List<PackageInfo> applicationInfosList;
     private ListView listView;
     private List<Element> elementsList;
     private ExtendedArrayAdapter adapter;
@@ -25,30 +26,26 @@ public class AllAppsActivity extends Activity {
         setContentView(R.layout.activity_all);
 
         packageManager = getPackageManager();
-        applicationInfosList = packageManager.getInstalledApplications(0);
+        applicationInfosList = packageManager.getInstalledPackages(0);
 
         elementsList = new ArrayList<>();
-        for(ApplicationInfo application : applicationInfosList) {
-            elementsList.add(new Element((String)packageManager.getApplicationLabel(application), packageManager.getApplicationIcon(application), 3.5));
+        for(int i=0; i<applicationInfosList.size(); i++) {
+            elementsList.add(new Element((String)applicationInfosList.get(i).applicationInfo.loadLabel(packageManager), applicationInfosList.get(i).applicationInfo.loadIcon(packageManager), 3.5));
         }
 
         listView = (ListView) findViewById(R.id.applicationAll);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(AllAppsActivity.this, AppInfoActivity.class);
+                intent.putExtra(MainActivity.appInfoConstant, applicationInfosList.get(position));
+                startActivity(intent);
+            }
+        });
 
         adapter = new ExtendedArrayAdapter(this, R.layout.element, elementsList);
 
         listView.setAdapter(adapter);
-    }
-    // TODO
-    public void showAppInfo(View view) {
-        Intent intent = new Intent(this, AppInfoActivity.class);
-        for(ApplicationInfo application : applicationInfosList) {
-            if(packageManager.getApplicationLabel(application)=="") {
-
-            }
-        }
-        //intent.putExtra(MainActivity.appInfoConstant, packageManager.getApplicationLabel(applicationInfosList.get(R.id.elementName)));
-        intent.putExtra(MainActivity.appInfoConstant, "blabla1");
-        startActivity(intent);
     }
 
 }

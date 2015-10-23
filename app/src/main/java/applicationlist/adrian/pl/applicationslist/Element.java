@@ -4,9 +4,9 @@ import android.graphics.drawable.Drawable;
 
 public class Element {
 
-    String name;
-    double size;
-    Drawable icon;
+    private String name;
+    private double size;
+    private Drawable icon;
 
     public Element(String name, Drawable icon) {
         this.name = name;

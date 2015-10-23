@@ -42,16 +42,9 @@ public class RunningAppsActivity extends Activity {
 
         listView.setAdapter(adapter);
     }
-    // TODO
+
     public void showAppInfo(View view) {
         Intent intent = new Intent(this, AppInfoActivity.class);
-        //for(ApplicationInfo application : applicationInfosList) {
-            //if(packageManager.getApplicationLabel(application)=="") {
-                //
-            //}
-        //}
-        //intent.putExtra(MainActivity.appInfoConstant, packageManager.getApplicationLabel(applicationInfosList.get(R.id.elementName)));
-        intent.putExtra(MainActivity.appInfoConstant, "blabla3");
         startActivity(intent);
     }
 
